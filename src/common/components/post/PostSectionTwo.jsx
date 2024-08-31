@@ -6,10 +6,10 @@ import Nav from "react-bootstrap/Nav";
 import { SectionTitleOne } from "../../elements/sectionTitle/SectionTitle";
 import AddBanner from "../ad-banner/AddBanner";
 import Slider from "react-slick";
-import { slugify } from "../../utils";
+import ImageCrad from "../../../../public/image/back-news-img-1.jpg";
+// import { slugify } from "../../utils";
 
 const filters = [
- 
   {
     id: 1,
     cate: "Gadget",
@@ -27,40 +27,77 @@ const filters = [
     cate: "Technology",
   },
 ];
-const defaultActiveCat = slugify(filters[0].cate);
+const fuzionPostData = [
+  {
+    id: 1,
+    name: "Alice",
+    title: "Research",
+    cate: "hello world",
+    featureImg: ImageCrad,
+  },
+  {
+    id: 2,
+    name: "Bob",
+    title: "Research",
+    cate: "hello world",
+    featureImg: ImageCrad,
+  },
+  {
+    id: 3,
+    name: "Charlie",
+    title: "Research",
+    cate: "hello world",
+    featureImg: ImageCrad,
+  },
+  {
+    id: 4,
+    name: "Bob",
+    title: "Research",
+    cate: "hello world",
+    featureImg: ImageCrad,
+  },
+  {
+    id: 5,
+    name: "Charlie",
+    title: "Research",
+    cate: "hello world",
+    featureImg: ImageCrad,
+  },
+];
+// const defaultActiveCat = slugify(filters[0].cate);
 
-const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
-  const defaultData = postData.filter(
-    (post) => slugify(post.cate) === defaultActiveCat
-  );
+const PostSectionTwo = ({ adBanner, headingTitle }) => {
+  // const defaultData = postData.filter(
+  //   (post) => slugify(post.cate) === defaultActiveCat
+  // );
 
-  const [activeNav, setActiveNav] = useState(defaultActiveCat);
-  const [tabPostData, setTabPostData] = useState(defaultData);
+  // const [activeNav, setActiveNav] = useState(defaultActiveCat);
+  // const [tabPostData, setTabPostData] = useState(defaultData);
 
-  const handleChange = (e) => {
-    let filterText = slugify(e.target.textContent);
-    setActiveNav(filterText);
+  // const handleChange = (e) => {
+  //   let filterText = slugify(e.target.textContent);
+  //   setActiveNav(filterText);
 
-    let tempData = [];
+  //   let tempData = [];
 
-    for (let i = 0; i < postData.length; i++) {
-      const element = postData[i];
-      let categories = element["cate"];
+  //   for (let i = 0; i < postData.length; i++) {
+  //     const element = postData[i];
+  //     let categories = element["cate"];
 
-      if (slugify(categories).includes(filterText)) {
-        tempData.push(element);
-      }
-    }
+  //     if (slugify(categories).includes(filterText)) {
+  //       tempData.push(element);
+  //     }
+  //   }
 
-    setTabPostData(tempData);
-  };
+  //   setTabPostData(tempData);
+  // };
 
   function SlickNextArrow(props) {
     const { className, onClick } = props;
     return (
       <button
         className={`slide-arrow next-arrow ${className}`}
-        onClick={onClick}
+        onClick={"onClick"}
       >
         <i className="fal fa-arrow-right"></i>
       </button>
@@ -72,7 +109,7 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
     return (
       <button
         className={`slide-arrow prev-arrow ${className}`}
-        onClick={onClick}
+        onClick={"onClick"}
       >
         <i className="fal fa-arrow-left"></i>
       </button>
@@ -103,7 +140,7 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,	
+          slidesToShow: 1,
         },
       },
     ],
@@ -113,26 +150,31 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
     <div className="axil-tab-area axil-section-gap bg-color-white">
       <div className="wrapper">
         <div className="container">
-			{adBanner === true ?  
-			<div className="row">
-            <div className="col-lg-12">
-              <AddBanner
-                img="/images/add-banner/banner-03.webp"
-                pClass="mb--30"
-              />
+          {adBanner === true ? (
+            <div className="row">
+              <div className="col-lg-12">
+                <AddBanner
+                  img="/images/add-banner/banner-03.webp"
+                  pClass="mb--30"
+                />
+              </div>
             </div>
-          </div> : ""}
-         
-          <SectionTitleOne title={ headingTitle || "Innovation & Tech"} />
+          ) : (
+            ""
+          )}
+
+          <SectionTitleOne title={headingTitle || "Innovation & Tech"} />
           <div className="row">
             <div className="col-lg-12">
-              <Tab.Container id="axilTab" defaultActiveKey={activeNav}>
+              <Tab.Container id="axilTab">
                 <Nav className="axil-tab-button nav nav-tabs mt--20">
-                  {filters.map((data) => (
+                  {fuzionPostData.map((data) => (
                     <Nav.Item key={data.id}>
                       <Nav.Link
-                        onClick={handleChange}
-                        eventKey={slugify(data.cate)}
+                        onClick={() => {
+                          console.log("hellow world");
+                        }}
+                        // eventKey={slugify(data.cate)}
                       >
                         {data.cate}
                       </Nav.Link>
@@ -141,20 +183,24 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
                 </Nav>
 
                 <Tab.Content>
-                  <Tab.Pane eventKey={activeNav} className="single-tab-content">
+                  <Tab.Pane
+                    // eventKey={activeNav}
+                    className="single-tab-content"
+                  >
                     <Slider
                       {...slideSettings}
                       className="modern-post-activation slick-layout-wrapper axil-slick-arrow arrow-between-side"
                     >
-                      {tabPostData.map((data) => (
-                        <div className="slick-single-layout" key={data.slug}>
+                      {fuzionPostData.map((data) => (
+                        <div className="slick-single-layout" key={data.id}>
                           <div className="content-block modern-post-style text-center content-block-column">
                             <div className="post-content">
                               <div className="post-cat">
                                 <div className="post-cat-list">
-                                  <Link
+                                  {/* <Link
                                     href={`/category/${slugify(data.cate)}`}
-                                  >
+                                  > */}
+                                  <Link href={"/category/#"}>
                                     <a className="hover-flip-item-wrapper">
                                       <span className="hover-flip-item">
                                         <span data-text={data.cate}>
@@ -166,35 +212,38 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
                                 </div>
                               </div>
                               <h4 className="title">
-                                <Link href={`/post/${data.slug}`}>
+                                <Link href={"/post/#"}>
                                   <a>{data.title}</a>
                                 </Link>
                               </h4>
                             </div>
-                            {data.featureImg ? 
-                            <div className="post-thumbnail">
-                              <div className="round-shape">
-                                <Image
-                                    src="/images/icons/shape-01.webp"
+                            {data.featureImg ? (
+                              <div className="post-thumbnail">
+                                <div className="round-shape">
+                                  <Image
+                                    src={data.featureImg}
                                     alt="Round Shape"
                                     height={77}
                                     width={390}
                                     priority={true}
                                   />
+                                </div>
+                                {/* <Link href={`/post/${data.slug}`}> */}
+                                <Link href={"/post/#"}>
+                                  <a>
+                                    <Image
+                                      src={data.featureImg}
+                                      alt={data.title}
+                                      height={260}
+                                      width={390}
+                                      priority={true}
+                                    />
+                                  </a>
+                                </Link>
                               </div>
-                              <Link href={`/post/${data.slug}`}>
-                                <a>
-                                  <Image
-                                    src={data.featureImg}
-                                    alt={data.title}
-                                    height={260}
-                                    width={390}
-                                    priority={true}
-                                  />
-                                </a>
-                              </Link>
-                            </div>
-                            :""}
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </div>
                       ))}

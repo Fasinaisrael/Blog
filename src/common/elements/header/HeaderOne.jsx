@@ -43,9 +43,9 @@ const HeaderOne = ({pClass, darkLogo, lightLogo, postData}) => {
                         </div>
                         <div className="col-xl-6 d-none d-xl-block">
                             <div className="mainmenu-wrapper">
-                                <nav className="mainmenu-nav">
+                               <nav className="mainmenu-nav">
                                     <Nav posts={postData}/>
-                                </nav>
+                                </nav> 
                             </div>
                         </div>
                         <div className="col-xl-3 col-lg-8 col-md-8 col-sm-9 col-12">
